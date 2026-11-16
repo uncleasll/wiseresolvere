@@ -35,7 +35,7 @@ export default function ContactPage() {
     {
       icon: Phone,
       title: t.contact.phone || "Call Us",
-      content: "+998 (90) 123-45-67",
+      content: "+998 (99) 402 0011",
       description: t.contact.phoneDesc || "Mon-Fri 9:00 AM - 6:00 PM",
     },
     {
@@ -83,14 +83,15 @@ export default function ContactPage() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="py-20 lg:py-32 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
-            <Badge variant="secondary" className="w-fit mx-auto">
+      <section className="relative overflow-hidden py-16 lg:py-24 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
+        <div className="pointer-events-none absolute inset-0"><div className="absolute -top-24 -left-24 h-64 w-64 rounded-full bg-primary/10 blur-3xl" /><div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-secondary/15 blur-3xl" /></div>
+        <div className="container relative mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center space-y-6 fade-up">
+            <Badge variant="secondary" className="w-fit mx-auto px-3 py-1 text-xs uppercase tracking-wider">
               {t.contact.title}
             </Badge>
-            <h1 className="text-4xl lg:text-6xl font-bold text-balance">{t.contact.getInTouch || "Get In Touch"}</h1>
-            <p className="text-xl text-muted-foreground text-pretty leading-relaxed">
+            <h1 className="text-4xl font-bold tracking-tight text-balance sm:text-5xl">{t.contact.getInTouch || "Get In Touch"}</h1>
+            <p className="text-lg sm:text-xl text-muted-foreground text-pretty leading-relaxed">
               {t.contact.heroDesc ||
                 "Have questions about our services? Need a consultation? We're here to help. Contact us today and let's discuss how we can support your business."}
             </p>
@@ -103,15 +104,19 @@ export default function ContactPage() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {contactInfo.map((info, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-all duration-300">
+              <Card key={index} className="group text-center card-hover">
                 <CardHeader>
-                  <div className="mx-auto w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                  <div className="mx-auto w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 transition-colors group-hover:bg-primary [&>svg]:transition-colors group-hover:[&>svg]:text-primary-foreground">
                     <info.icon className="h-6 w-6 text-primary" />
                   </div>
                   <CardTitle className="text-lg">{info.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="font-semibold text-primary mb-1">{info.content}</div>
+                  <div className="font-semibold text-primary mb-1">
+                    {info.icon === Mail ? <a href={`mailto:${info.content}`} className="hover:underline underline-offset-4">{info.content}</a>
+                      : info.icon === Phone ? <a href={`tel:${info.content.replace(/[^\d+]/g, "")}`} className="hover:underline underline-offset-4">{info.content}</a>
+                      : info.content}
+                  </div>
                   <CardDescription>{info.description}</CardDescription>
                 </CardContent>
               </Card>
@@ -227,10 +232,10 @@ export default function ContactPage() {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold tracking-tight mb-4">
               {t.contact.whyContactTitle || "Why Contact Wise Resolvere?"}
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               {t.contact.whyContactDesc ||
                 "We're committed to providing exceptional service and building lasting relationships with our clients."}
             </p>
@@ -238,7 +243,7 @@ export default function ContactPage() {
 
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <Card className="text-center p-6">
+              <Card className="text-center p-6 card-hover">
                 <CardHeader>
                   <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
                     <Clock className="h-8 w-8 text-primary" />
@@ -252,7 +257,7 @@ export default function ContactPage() {
                 </CardContent>
               </Card>
 
-              <Card className="text-center p-6">
+              <Card className="text-center p-6 card-hover">
                 <CardHeader>
                   <div className="mx-auto w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mb-4">
                     <MessageSquare className="h-8 w-8 text-secondary" />
@@ -267,7 +272,7 @@ export default function ContactPage() {
                 </CardContent>
               </Card>
 
-              <Card className="text-center p-6">
+              <Card className="text-center p-6 card-hover">
                 <CardHeader>
                   <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
                     <Mail className="h-8 w-8 text-primary" />

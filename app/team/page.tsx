@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { Mail, Linkedin, Award, GraduationCap, ArrowRight } from "lucide-react"
+import { Award, GraduationCap, ArrowRight, Phone, Mail } from "lucide-react"
 
 export default function TeamPage() {
   const { t } = useLanguage()
@@ -13,59 +13,87 @@ export default function TeamPage() {
   const teamMembers = [
     {
       name: "Makhmudov Bobur Hamroqul",
-      position: t.team.director || "Director",
+      position: "Bosh direktor",
       image: "/bobur.jpg",
-      qualification: "DipFR ACCA",
+      phone: "+998 99 402 00 11",
+      email: "bobur.makhmudov@wiseresolvere.uz",
       education: [
-        "Republic of Korea, CHONNAM NATIONAL UNIVERSITY (2018-2020) - World Economy (Master's degree)",
-        "Tashkent Financial Institute (2012-2016) - Accounting and Auditing (Bachelor's)",
+        "2012-2016 Toshkent moliya instituti, Buxgalteriya hisobi va audit, bakalavr",
+        "2018-2020 Chonnam milliy universiteti Janubiy Koreya, Iqtisodiyot va biznes boshqaruvi, magistratura",
       ],
-      description:
-        t.team.directorDesc ||
-        "Qualified accountant with extensive experience in international accounting standards and financial management.",
-      email: "b.makhmudov@wiseresolvere.com",
-      linkedin: "#",
+      certificates: [
+        "Auditorning Malaka sertifikati",
+        "Soliq maslahatchisining Malaka sertifikati",
+        "ACCA",
+        "ACCA DipIFR (eng)",
+      ],
+      experience: "Ish staji 10+ yil",
     },
     {
-      name: "Rakhmanov Begzod Temirovich",
-      position: t.team.auditor || "Auditor",
+      name: "Raxmanov Begzod",
+      position: "Auditor, MHXS bo’limi boshlig’i",
       image: "/begzod.jpg",
-      qualification: "IFRS (ACCA)",
+      phone: "+998 90 974 35 43",
+      email: "begzod.rakhmanov@wiseresolvere.uz",
       education: [
-        "Oxford Brookes University (2016-2020) - Accounting (BA)",
-        "University of World Economy and Diplomacy (2008-2013) - World Economy and International Economic Relations (Bachelor's)",
+        "2008-2013 Jahon iqtisodiyoti va diplomatiya universiteti, Jahon iqtisodiyoti va xalqaro iqtisodiy munosabatlar, bakalavr",
+        "2016-2020 Oksford Bruks universiteti Buyuk Britaniya, Buxgalteriya hisobi, bakalavr",
       ],
-      description:
-        t.team.auditorDesc ||
-        "Qualified accountant specializing in IFRS with international education and extensive auditing experience.",
-      email: "b.rakhmanov@wiseresolvere.com",
-      linkedin: "#",
+      certificates: [
+        "Auditorning Malaka sertifikati",
+        "Advanced Diploma in Accounting and Business (ACCA)",
+      ],
+      experience: "Ish staji 13+ yil",
     },
     {
-      name: "Quldosheva Xolisa Kamoliddinovna",
-      position: t.team.auditor || "Auditor",
+      name: "Quldosheva Xolisa",
+      position: "Auditor",
       image: "/xolisa.jpg",
-      qualification: "CAP",
+      phone: "+998 97 460 32 31",
+      email: "kholisa.kuldosheva@wiseresolvere.uz",
       education: [
-        "Tashkent Financial Institute (2016-2018) - Audit (Master's degree)",
-        "Tashkent Financial Institute (2012-2016) - Accounting and Auditing (Bachelor's)",
+        "2012-2016 Toshkent moliya instituti, Buxgalteriya hisobi va audit, bakalavr",
+        "2016-2018 Toshkent moliya instituti, Audit, magistratura",
+        "2024-2025 Toshkent davlat iqtisodiyot universiteti, Buxgalteriya hisobi va audit, PhD",
       ],
-      description:
-        t.team.auditorDesc || "Qualified accountant with specialized expertise in auditing and financial analysis.",
-      email: "x.quldosheva@wiseresolvere.com",
-      linkedin: "#",
+      certificates: [
+        "Auditorning Malaka sertifikati",
+        "Soliq maslahatchisining Malaka sertifikati",
+        "CAP",
+      ],
+      experience: "Ish staji 13+ yil",
     },
     {
-      name: "Mirzaev Bakhromjon Bakhodirovich",
-      position: t.team.auditor || "Auditor",
-      image: "/placeholder-3gtsv.png",
-      qualification: "Qualified Accountant",
-      education: ["Tashkent Financial Institute (2012-2016) - Accounting and Auditing (Bachelor's)"],
-      description:
-        t.team.auditorDesc ||
-        "Qualified accountant with solid foundation in accounting principles and auditing practices.",
-      email: "b.mirzaev@wiseresolvere.com",
-      linkedin: "#",
+      name: "Murodxo’jayeva Dilnoza",
+      position: "Auditor",
+      image: "/dilnoza.png",
+      phone: "+998 97 751 07 04",
+      email: "dilnoza.murodkhojaeva@wiseresolvere.uz",
+      education: [
+        "2012-2016 Toshkent moliya instituti, Buxgalteriya hisobi va audit, bakalavr",
+      ],
+      certificates: [
+        "Auditorning Malaka sertifikati",
+        "ACCA DipIFR (rus)",
+        "CAP",
+      ],
+      experience: "Ish staji 10+ yil",
+    },
+    {
+      name: "Atoyev Xasan",
+      position: "Auditor",
+      image: "/xasan.png",
+      phone: "+998 91 648 01 30",
+      email: "khasan.atoev@wiseresolvere.uz",
+      education: [
+        "2012-2016 Toshkent temir yo‘l transporti muhandislari instituti, Buxgalteriya hisobi va audit, bakalavr",
+        "2017-2019 Chonnam milliy universiteti Janubiy Koreya, Iqtisodiyot va biznes boshqaruvi, magistratura",
+      ],
+      certificates: [
+        "Auditorning Malaka sertifikati",
+        "CAP",
+      ],
+      experience: "Ish staji 10+ yil",
     },
   ]
 
@@ -93,104 +121,81 @@ export default function TeamPage() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="py-20 lg:py-32 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
-            <Badge variant="secondary" className="w-fit mx-auto">
+      <section className="relative overflow-hidden py-16 lg:py-24 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
+        <div className="pointer-events-none absolute inset-0"><div className="absolute -top-24 -left-24 h-64 w-64 rounded-full bg-primary/10 blur-3xl" /><div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-secondary/15 blur-3xl" /></div>
+        <div className="container relative mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center space-y-6 fade-up">
+            <Badge variant="secondary" className="w-fit mx-auto px-3 py-1 text-xs uppercase tracking-wider">
               {t.nav.team}
             </Badge>
-            <h1 className="text-4xl lg:text-6xl font-bold text-balance">{t.team.title}</h1>
-            <p className="text-xl text-muted-foreground text-pretty leading-relaxed">{t.team.subtitle}</p>
+            <h1 className="text-4xl font-bold tracking-tight text-balance sm:text-5xl">{t.team.title}</h1>
+            <p className="text-lg sm:text-xl text-muted-foreground text-pretty leading-relaxed">{t.team.subtitle}</p>
           </div>
         </div>
       </section>
 
       {/* Departments Overview */}
+
+      {/* Team Members */}
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4">Our Departments</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Specialized teams dedicated to different aspects of financial services
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {departments.map((dept, index) => (
-              <Card key={index} className="text-center p-8 hover:shadow-lg transition-all duration-300">
-                <CardHeader>
-                  <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                    <dept.icon className="h-8 w-8 text-primary" />
-                  </div>
-                  <CardTitle className="text-xl">{dept.name}</CardTitle>
-                  <Badge variant="outline" className="w-fit mx-auto">
-                    {dept.teamSize}
-                  </Badge>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="leading-relaxed">{dept.description}</CardDescription>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Team Members */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4">Leadership Team</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Meet the experienced professionals leading our organization
-            </p>
+            <span className="eyebrow mb-3">{t.nav.team}</span>
+            <h2 className="text-3xl lg:text-4xl font-bold tracking-tight mb-4">{t.team.title}</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{t.team.subtitle}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {teamMembers.map((member, index) => (
-              <Card key={index} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                <CardHeader className="text-center pb-4">
+              <Card key={index} className="group card-hover bg-card">
+                <CardHeader className="text-center pb-4 border-b mx-6 px-0">
                   <div className="relative mx-auto mb-4">
                     <img
                       src={member.image || "/placeholder.svg"}
                       alt={member.name}
-                      className="w-32 h-32 rounded-full object-cover mx-auto border-4 border-background shadow-lg"
+                      className="w-32 h-32 rounded-full object-cover mx-auto border-4 border-background shadow-lg ring-2 ring-primary/20 transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>
                   <CardTitle className="text-xl">{member.name}</CardTitle>
                   <CardDescription className="font-medium text-primary">{member.position}</CardDescription>
                   <Badge variant="secondary" className="w-fit mx-auto mt-2">
-                    {member.qualification}
+                    {member.experience}
                   </Badge>
                 </CardHeader>
 
-                <CardContent className="space-y-4">
-                  <p className="text-sm text-muted-foreground leading-relaxed">{member.description}</p>
+                <CardContent className="space-y-5 pt-5">
+                  <div className="flex flex-col items-center gap-1.5 text-sm">
+                    <a href={`tel:${member.phone.replace(/\s/g, "")}`} className="inline-flex items-center gap-2 rounded-md px-2 py-1 transition-colors hover:bg-muted hover:text-primary">
+                      <Phone className="h-4 w-4 text-primary" />
+                      <span>{member.phone}</span>
+                    </a>
+                    <a href={`mailto:${member.email}`} className="inline-flex items-center gap-2 rounded-md px-2 py-1 transition-colors hover:bg-muted hover:text-primary break-all">
+                      <Mail className="h-4 w-4 shrink-0 text-primary" />
+                      <span>{member.email}</span>
+                    </a>
+                  </div>
 
                   <div>
-                    <h4 className="font-semibold text-sm mb-2">{t.team.education || "Education"}:</h4>
-                    <div className="space-y-1">
+                    <h4 className="font-semibold text-xs uppercase tracking-wider text-muted-foreground mb-2">{t.team.education || "Ta’lim"}</h4>
+                    <div className="space-y-1.5">
                       {member.education.map((edu, eduIndex) => (
-                        <div key={eduIndex} className="text-xs text-muted-foreground leading-relaxed">
-                          {edu}
+                        <div key={eduIndex} className="flex gap-2 text-xs text-muted-foreground leading-relaxed">
+                          <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-primary/60" />
+                          <span>{edu}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="flex justify-center gap-4 pt-4 border-t">
-                    <Button size="sm" variant="outline" className="gap-2 bg-transparent" asChild>
-                      <a href={`mailto:${member.email}`}>
-                        <Mail className="h-4 w-4" />
-                        Email
-                      </a>
-                    </Button>
-                    <Button size="sm" variant="outline" className="gap-2 bg-transparent" asChild>
-                      <a href={member.linkedin} target="_blank" rel="noopener noreferrer">
-                        <Linkedin className="h-4 w-4" />
-                        LinkedIn
-                      </a>
-                    </Button>
+                  <div>
+                    <h4 className="font-semibold text-xs uppercase tracking-wider text-muted-foreground mb-2">Sertifikatlar</h4>
+                    <div className="flex flex-wrap gap-1.5">
+                      {member.certificates.map((cert, certIndex) => (
+                        <Badge key={certIndex} variant="outline" className="whitespace-normal text-left text-xs font-normal">
+                          {cert}
+                        </Badge>
+                      ))}
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -204,17 +209,17 @@ export default function TeamPage() {
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-3xl mx-auto space-y-8">
             <h2 className="text-3xl lg:text-4xl font-bold">{t.team.joinTeam}</h2>
-            <p className="text-xl opacity-90 leading-relaxed">{t.team.joinTeamDesc}</p>
+            <p className="text-lg sm:text-xl opacity-90 leading-relaxed">{t.team.joinTeamDesc}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 size="lg"
                 variant="outline"
-                className="text-lg px-8 border-secondary-foreground text-secondary-foreground hover:bg-secondary-foreground hover:text-secondary bg-transparent"
+                className="px-8 border-secondary-foreground/60 text-secondary-foreground hover:bg-secondary-foreground hover:text-secondary bg-transparent"
                 asChild
               >
                 <Link href="/order">
                   {t.common.contactUs}
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
             </div>

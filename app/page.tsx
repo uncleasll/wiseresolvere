@@ -84,7 +84,7 @@ export default function HomePage() {
         <div className="container relative z-10 mx-auto px-4">
           <div className="grid items-center gap-12 md:gap-16 lg:grid-cols-2">
             {/* Left */}
-            <div className="space-y-8">
+            <div className="space-y-8 fade-up">
               {/* trust badge */}
               <div className="inline-flex items-center gap-2 rounded-full border bg-background/60 px-4 py-1.5 text-sm backdrop-blur">
                 <Shield className="h-4 w-4 text-primary" />
@@ -94,25 +94,25 @@ export default function HomePage() {
               </div>
 
               <div className="space-y-4">
-                <h1 className="text-4xl font-bold leading-tight text-balance lg:text-6xl">
+                <h1 className="text-4xl font-bold leading-[1.1] tracking-tight text-balance sm:text-5xl lg:text-[3.25rem]">
                   {t.hero?.title}
                 </h1>
-                <p className="text-xl leading-relaxed text-muted-foreground text-pretty">
+                <p className="max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty sm:text-xl">
                   {t.hero?.subtitle}
                 </p>
               </div>
 
               {/* CTAs */}
               <div className="flex flex-col gap-4 sm:flex-row">
-                <Button size="lg" className="px-8 text-lg" asChild>
+                <Button size="lg" className="px-8" asChild>
                   <Link href="/order">
                     {t.hero?.cta}
-                    <ArrowRight className="ml-2 h-5 w-5" />
+                    <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </Button>
-                <Button size="lg" variant="outline" className="bg-transparent px-8 text-lg" asChild>
-                  <Link href="/services">{t.nav?.services}</Link>
-                </Button>
+                {/* <Button size="lg" variant="outline" className="bg-transparent px-8 text-lg" asChild>
+                  <Link href="/order">{t.nav?.services}</Link>
+                </Button> */}
               </div>
 
               {/* mini stats */}
@@ -162,35 +162,35 @@ export default function HomePage() {
             </div>
 
             {/* Right */}
-            <div className="relative">
-              <div className="relative rounded-2xl border bg-card p-4 shadow-xl">
+            <div className="relative fade-up fade-up-delay-2">
+              <div className="relative rounded-2xl border bg-card p-3 shadow-xl">
                 {/* hero image — o'zingiznikini public/ ichiga qo'ying */}
                 <div className="overflow-hidden rounded-xl">
                   <Image
-                    src="/hero-audit.png"
+                    src="/hero-2.jpg"
                     alt="Wise Resolvere — Audit & Consulting"
                     width={960}
                     height={720}
-                    className="h-auto w-full object-cover"
+                    className="h-auto w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
                     priority
                   />
                 </div>
 
                 {/* floating badges */}
-                <div className="pointer-events-none absolute -left-4 top-6 hidden md:block">
-                  <div className="rounded-xl border bg-background/80 px-4 py-2 shadow-sm backdrop-blur">
+                <div className="pointer-events-none absolute -left-5 top-8 hidden md:block animate-float">
+                  <div className="rounded-xl border bg-background/90 px-4 py-2.5 shadow-lg backdrop-blur">
                     <div className="flex items-center gap-2">
                       <CheckCircle className="h-5 w-5 text-primary" />
-                      <span className="text-sm">{t.features?.qualityAssurance || "Quality Assurance"}</span>
+                      <span className="text-sm font-medium">{t.features?.qualityAssurance || "Quality Assurance"}</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="pointer-events-none absolute -right-4 bottom-6 hidden md:block">
-                  <div className="rounded-xl border bg-background/80 px-4 py-2 shadow-sm backdrop-blur">
+                <div className="pointer-events-none absolute -right-5 bottom-8 hidden md:block animate-float-delayed">
+                  <div className="rounded-xl border bg-background/90 px-4 py-2.5 shadow-lg backdrop-blur">
                     <div className="flex items-center gap-2">
                       <TrendingUp className="h-5 w-5 text-secondary" />
-                      <span className="text-sm">{t.features?.dataAnalytics || "Data Analytics"}</span>
+                      <span className="text-sm font-medium">{t.features?.dataAnalytics || "Data Analytics"}</span>
                     </div>
                   </div>
                 </div>
@@ -203,35 +203,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="py-20 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4">{t.services?.title}</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              {t.services?.subtitle || "Comprehensive audit and consulting services tailored to your business needs"}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((feature, index) => (
-              <Card key={index} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                <CardHeader className="text-center">
-                  <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                    <feature.icon className="h-8 w-8 text-primary" />
-                  </div>
-                  <CardTitle className="text-xl">{feature.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-center leading-relaxed">
-                    {feature.description}
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      
 
       {/* Why Choose Us Section */}
       <section className="py-20">
@@ -239,10 +211,11 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
               <div className="space-y-4">
-                <h2 className="text-3xl lg:text-4xl font-bold">
+                <span className="eyebrow">{t.nav?.about}</span>
+                <h2 className="text-3xl lg:text-4xl font-bold tracking-tight text-balance">
                   {t.whyChoose?.title || "Why Choose Wise Resolvere?"}
                 </h2>
-                <p className="text-xl text-muted-foreground leading-relaxed">
+                <p className="text-lg text-muted-foreground leading-relaxed">
                   {t.whyChoose?.subtitle ||
                     "We combine expertise, technology, and personalized service to deliver exceptional results for your business."}
                 </p>
@@ -250,9 +223,9 @@ export default function HomePage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {benefits.map((benefit, index) => (
-                  <div key={index} className="flex items-center gap-3">
-                    <CheckCircle className="h-5 w-5 text-secondary flex-shrink-0" />
-                    <span className="text-sm">{benefit}</span>
+                  <div key={index} className="flex items-center gap-3 rounded-lg border bg-card/60 px-3 py-2.5 transition-colors hover:border-secondary/40">
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-secondary/15"><CheckCircle className="h-3.5 w-3.5 text-secondary" /></span>
+                    <span className="text-sm font-medium">{benefit}</span>
                   </div>
                 ))}
               </div>
@@ -260,13 +233,13 @@ export default function HomePage() {
               <Button size="lg" className="w-fit" asChild>
                 <Link href="/about">
                   {t.whyChoose?.learnMore || "Learn More About Us"}
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <Card className="p-6 text-center">
+              <Card className="p-6 text-center card-hover">
                 <Building className="h-12 w-12 text-primary mx-auto mb-4" />
                 <h3 className="font-semibold mb-2">{t.features?.enterprise || "Enterprise Solutions"}</h3>
                 <p className="text-sm text-muted-foreground">
@@ -274,7 +247,7 @@ export default function HomePage() {
                 </p>
               </Card>
 
-              <Card className="p-6 text-center mt-8">
+              <Card className="p-6 text-center mt-8 card-hover">
                 <Users className="h-12 w-12 text-secondary mx-auto mb-4" />
                 <h3 className="font-semibold mb-2">{t.features?.expertTeam || "Expert Team"}</h3>
                 <p className="text-sm text-muted-foreground">
@@ -282,7 +255,7 @@ export default function HomePage() {
                 </p>
               </Card>
 
-              <Card className="p-6 text-center">
+              <Card className="p-6 text-center card-hover">
                 <PieChart className="h-12 w-12 text-primary mx-auto mb-4" />
                 <h3 className="font-semibold mb-2">{t.features?.dataAnalytics || "Data Analytics"}</h3>
                 <p className="text-sm text-muted-foreground">
@@ -290,7 +263,7 @@ export default function HomePage() {
                 </p>
               </Card>
 
-              <Card className="p-6 text-center mt-8">
+              <Card className="p-6 text-center mt-8 card-hover">
                 <Award className="h-12 w-12 text-secondary mx-auto mb-4" />
                 <h3 className="font-semibold mb-2">{t.features?.qualityAssurance || "Quality Assurance"}</h3>
                 <p className="text-sm text-muted-foreground">
@@ -303,8 +276,9 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4 text-center">
+      <section className="relative overflow-hidden py-20 bg-primary text-primary-foreground">
+        <div className="pointer-events-none absolute inset-0"><div className="absolute -top-32 right-0 h-80 w-80 rounded-full bg-secondary/30 blur-3xl" /><div className="absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-white/10 blur-3xl" /></div>
+        <div className="container relative mx-auto px-4 text-center">
           <div className="max-w-3xl mx-auto space-y-8">
             <h2 className="text-3xl lg:text-4xl font-bold">{t.cta?.title || "Ready to Get Started?"}</h2>
             <p className="text-xl opacity-90 leading-relaxed">
@@ -312,19 +286,19 @@ export default function HomePage() {
                 "Contact us today for a free consultation and discover how we can help your business achieve its financial goals."}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="secondary" className="text-lg px-8" asChild>
+              <Button size="lg" variant="secondary" className="px-8" asChild>
                 <Link href="/order">
                   {t.cta?.consultation || "Get Free Consultation"}
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="text-lg px-8 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary bg-transparent"
+                className="px-8 border-primary-foreground/60 text-primary-foreground hover:bg-primary-foreground hover:text-primary hover:border-primary-foreground bg-transparent"
                 asChild
               >
-                <Link href="/rates">{t.cta?.viewRates || "View Our Rates"}</Link>
+                <Link href="/services">{t.cta?.viewRates || "View Our Services"}</Link>
               </Button>
             </div>
           </div>
@@ -335,13 +309,13 @@ export default function HomePage() {
 <section className="py-20 bg-muted/30">
   <div className="container mx-auto px-4">
     <div className="text-center mb-12">
-      <h2 className="text-3xl lg:text-4xl font-bold mb-3">
+      <h2 className="text-3xl lg:text-4xl font-bold tracking-tight mb-3">
         {t.partners?.title || "Bizga ishonch bildirganlar"}
       </h2>
       <p className="text-muted-foreground max-w-2xl mx-auto">
         {t.partners?.subtitle || "Yetakchi kompaniyalar hamkorligimizdan mamnun"}
       </p>
-    </div>
+    </div> 
 
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
       {partners.map((p) => {
@@ -349,15 +323,14 @@ export default function HomePage() {
         return (
           <div
             key={p.key}
-            className="relative rounded-xl bg-white border shadow-sm hover:shadow-md transition 
-                       aspect-[16/9] flex items-center justify-center"
+            className="group relative rounded-xl bg-white border card-hover aspect-[16/9] flex items-center justify-center"
             title={name}
           >
             <Image
               src={p.logo}
               alt={name}
               fill
-              className="object-contain p-4"
+              className="object-contain p-5 grayscale opacity-70 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100"
             />
           </div>
         )
