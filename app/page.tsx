@@ -4,6 +4,9 @@ import { useLanguage } from "@/hooks/use-language"
 import { Button } from "@/components/ui/button"
 import { Reveal } from "@/components/reveal"
 import { Counter } from "@/components/counter"
+import { HeroBackground } from "@/components/hero-background"
+import { TiltCard } from "@/components/tilt-card"
+import { RotatingWords } from "@/components/rotating-words"
 import Link from "next/link"
 import Image from "next/image"
 import {
@@ -18,6 +21,9 @@ import {
   PieChart,
   Building,
   Sparkles,
+  Star,
+  PlayCircle,
+  ShieldCheck,
 } from "lucide-react"
 
 type PartnerKey =
@@ -88,17 +94,17 @@ export default function HomePage() {
   return (
     <div className="flex flex-col">
       {/* ================= HERO ================= */}
-      <section className="relative overflow-hidden pt-12 pb-20 sm:pt-16 lg:pt-20 lg:pb-28">
-        <div className="pointer-events-none absolute inset-0 bg-dots bg-dots-fade" />
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute -top-40 -left-40 h-[28rem] w-[28rem] rounded-full bg-primary/15 blur-3xl" />
-          <div className="absolute -bottom-40 -right-40 h-[30rem] w-[30rem] rounded-full bg-secondary/20 blur-3xl" />
-        </div>
+      <section className="relative overflow-hidden pt-10 pb-24 sm:pt-14 lg:pt-16 lg:pb-32">
+        <HeroBackground />
 
         <div className="container relative z-10 mx-auto px-4">
-          <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
+          <div className="grid items-center gap-14 lg:grid-cols-[1.08fr_1fr] lg:gap-12">
+            {/* Copy */}
             <div className="space-y-8">
-              <div className="fade-up inline-flex items-center gap-2 rounded-full border border-primary/15 bg-background/70 px-4 py-1.5 text-sm shadow-sm backdrop-blur">
+              <div className="fade-up inline-flex items-center gap-2.5 rounded-full border border-primary/15 bg-background/70 py-1.5 pl-1.5 pr-4 text-sm shadow-sm backdrop-blur">
+                <span className="rounded-full bg-secondary px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-secondary-foreground">
+                  {t.hero.badge}
+                </span>
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-secondary" />
@@ -106,81 +112,153 @@ export default function HomePage() {
                 <span className="font-medium text-foreground/80">{t.hero.trustBadge}</span>
               </div>
 
-              <div className="space-y-5">
-                <h1 className="fade-up fade-up-delay-1 text-4xl font-bold leading-[1.08] tracking-tight text-balance sm:text-5xl lg:text-6xl">
-                  <span className="text-gradient">{t.hero.title}</span>
+              <div className="space-y-6">
+                <h1 className="fade-up fade-up-delay-1 text-[2.6rem] font-bold leading-[1.05] tracking-tight text-balance sm:text-5xl lg:text-[4rem]">
+                  <span className="text-gradient-animated">{t.hero.title}</span>
                 </h1>
+
+                <div className="fade-up fade-up-delay-2 text-xl font-semibold text-foreground/80 sm:text-2xl">
+                  <span className="text-muted-foreground font-normal">—&nbsp;</span>
+                  <RotatingWords
+                    words={[t.services.audit, t.services.tax, t.services.consulting, t.services.accounting, t.services.analysis]}
+                    className="text-primary"
+                  />
+                </div>
+
                 <p className="fade-up fade-up-delay-2 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty sm:text-xl">
                   {t.hero.subtitle}
                 </p>
               </div>
 
               <div className="fade-up fade-up-delay-3 flex flex-col gap-3 sm:flex-row">
-                <Button size="lg" className="btn-shine px-8" asChild>
+                <Button size="lg" className="btn-shine h-13 px-8 text-base shadow-lg shadow-primary/25" asChild>
                   <Link href="/order">
                     {t.hero.cta}
                     <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </Button>
-                <Button size="lg" variant="outline" className="px-8" asChild>
-                  <Link href="/services">{t.nav.services}</Link>
+                <Button size="lg" variant="outline" className="glass h-13 px-8 text-base" asChild>
+                  <Link href="/services">
+                    <PlayCircle className="h-5 w-5 text-primary" />
+                    {t.nav.services}
+                  </Link>
                 </Button>
               </div>
 
-              <div className="fade-up fade-up-delay-3 flex flex-wrap items-center gap-x-6 gap-y-3 pt-2 text-sm text-muted-foreground">
-                {[t.hero.yearsExperience, t.hero.clientsSatisfied, t.hero.projectsCompleted].map((s) => (
-                  <span key={s} className="inline-flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-secondary" />
-                    {s}
-                  </span>
-                ))}
+              {/* Social proof row */}
+              <div className="fade-up fade-up-delay-3 flex flex-wrap items-center gap-x-8 gap-y-4 pt-2">
+                <div className="flex items-center gap-3">
+                  <div className="flex -space-x-2.5">
+                    {["/bobur.jpg", "/begzod.jpg", "/xolisa.jpg", "/dilnoza.png"].map((src) => (
+                      <Image
+                        key={src}
+                        src={src}
+                        alt=""
+                        width={36}
+                        height={36}
+                        className="h-9 w-9 rounded-full border-2 border-background object-cover shadow"
+                      />
+                    ))}
+                  </div>
+                  <div className="text-sm leading-tight">
+                    <div className="font-semibold">{t.hero.yearsExperience}</div>
+                    <div className="text-muted-foreground">{t.features.expertTeam}</div>
+                  </div>
+                </div>
+                <div className="hidden h-8 w-px bg-border sm:block" />
+                <div className="flex items-center gap-2 text-sm">
+                  <div className="flex text-amber-400">
+                    {[0, 1, 2, 3, 4].map((i) => (
+                      <Star key={i} className="h-4 w-4 fill-current" />
+                    ))}
+                  </div>
+                  <span className="font-semibold">98%</span>
+                  <span className="text-muted-foreground">{t.stats.clientSatisfaction}</span>
+                </div>
               </div>
             </div>
 
-            <div className="relative fade-up fade-up-delay-2">
-              <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-primary/20 via-transparent to-secondary/25 blur-2xl" />
-              <div className="relative overflow-hidden rounded-3xl border bg-card p-2.5 shadow-2xl shadow-primary/10">
-                <div className="overflow-hidden rounded-[1.1rem]">
-                  <Image
-                    src="/hero-2.jpg"
-                    alt="Wise Resolvere — Audit & Consulting"
-                    width={960}
-                    height={720}
-                    className="h-auto w-full object-cover transition-transform duration-[1200ms] hover:scale-[1.04]"
-                    priority
-                  />
-                </div>
-              </div>
+            {/* Visual */}
+            <div className="relative fade-up fade-up-delay-2 lg:pl-6">
+              <div className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-gradient-to-br from-primary/25 via-transparent to-secondary/30 blur-3xl" />
 
-              <div className="pointer-events-none absolute -left-6 top-10 hidden md:block animate-float">
-                <div className="glass rounded-2xl px-4 py-3 shadow-lg">
-                  <div className="flex items-center gap-3">
-                    <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10">
-                      <CheckCircle className="h-5 w-5 text-primary" />
-                    </span>
-                    <div>
-                      <div className="text-xs text-muted-foreground">ISA / IFRS</div>
-                      <div className="text-sm font-semibold">{t.features.qualityAssurance}</div>
+              <TiltCard className="rounded-3xl">
+                <div className="relative overflow-hidden rounded-3xl border border-white/40 bg-card/80 p-2.5 shadow-2xl shadow-primary/15 backdrop-blur">
+                  <div className="relative overflow-hidden rounded-[1.15rem]">
+                    <Image
+                      src="/hero-2.jpg"
+                      alt="Wise Resolvere — Audit & Consulting"
+                      width={960}
+                      height={720}
+                      className="h-auto w-full object-cover"
+                      priority
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent" />
+
+                    {/* in-image caption */}
+                    <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-3 text-white">
+                      <div>
+                        <div className="text-[11px] font-semibold uppercase tracking-[0.2em] opacity-80">Wise Resolvere</div>
+                        <div className="text-lg font-bold leading-tight">{t.hero.badge}</div>
+                      </div>
+                      <div className="glass rounded-xl px-3 py-2 text-right text-foreground">
+                        <div className="text-[10px] uppercase tracking-wider text-muted-foreground">{t.stats.clientsServed}</div>
+                        <div className="text-base font-bold text-primary">500+</div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="pointer-events-none absolute -right-6 bottom-10 hidden md:block animate-float-delayed">
-                <div className="glass rounded-2xl px-4 py-3 shadow-lg">
-                  <div className="flex items-center gap-3">
-                    <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-secondary/15">
-                      <TrendingUp className="h-5 w-5 text-secondary" />
-                    </span>
-                    <div>
-                      <div className="text-xs text-muted-foreground">+24%</div>
-                      <div className="text-sm font-semibold">{t.features.dataAnalytics}</div>
+                {/* Floating cards (pop out in 3D) */}
+                <div className="tilt-pop pointer-events-none absolute -left-8 top-10 hidden md:block animate-float">
+                  <div className="glass rounded-2xl px-4 py-3 shadow-xl">
+                    <div className="flex items-center gap-3">
+                      <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-md shadow-primary/30">
+                        <ShieldCheck className="h-5 w-5" />
+                      </span>
+                      <div>
+                        <div className="text-[11px] uppercase tracking-wider text-muted-foreground">ISA · IFRS · ACCA</div>
+                        <div className="text-sm font-semibold">{t.features.qualityAssurance}</div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+
+                <div className="tilt-pop pointer-events-none absolute -right-8 bottom-16 hidden md:block animate-float-delayed">
+                  <div className="glass rounded-2xl px-4 py-3 shadow-xl">
+                    <div className="flex items-center gap-3">
+                      <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary text-secondary-foreground shadow-md shadow-secondary/30">
+                        <TrendingUp className="h-5 w-5" />
+                      </span>
+                      <div>
+                        <div className="text-[11px] uppercase tracking-wider text-muted-foreground">{t.hero.projectsCompleted}</div>
+                        <div className="flex items-center gap-1.5 text-sm font-semibold">
+                          {t.features.dataAnalytics}
+                          <span className="rounded-md bg-secondary/15 px-1.5 py-0.5 text-[11px] font-bold text-secondary">+24%</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* mini bar chart */}
+                <div className="tilt-pop pointer-events-none absolute -bottom-6 left-10 hidden lg:block">
+                  <div className="glass flex items-end gap-1.5 rounded-2xl px-4 py-3 shadow-xl">
+                    {[35, 55, 45, 70, 60, 85, 100].map((h, i) => (
+                      <span
+                        key={i}
+                        className="w-2 rounded-sm bg-gradient-to-t from-primary to-secondary"
+                        style={{ height: `${h * 0.4}px`, opacity: 0.5 + i * 0.07 }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </TiltCard>
             </div>
           </div>
+
+          {/* scroll cue */}
+          <div className="scroll-cue mx-auto mt-16 hidden w-6 rounded-full border-2 border-primary/30 pt-1.5 lg:block" style={{ height: 36 }} />
         </div>
       </section>
 

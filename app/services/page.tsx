@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Reveal } from "@/components/reveal"
+import { PageHero } from "@/components/page-hero"
 import {
   Shield,
   Calculator,
@@ -110,21 +111,14 @@ export default function ServicesPage() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-16 lg:py-24 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
-        <div className="pointer-events-none absolute inset-0 bg-dots bg-dots-fade" />
-        <div className="pointer-events-none absolute inset-0"><div className="absolute -top-24 -left-24 h-64 w-64 rounded-full bg-primary/10 blur-3xl" /><div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-secondary/15 blur-3xl" /></div>
-        <div className="container relative mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center space-y-6 fade-up">
-            <Badge variant="secondary" className="w-fit mx-auto px-3 py-1 text-xs uppercase tracking-wider">
-              {t.nav.services}
-            </Badge>
-            <h1 className="text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:text-[3.4rem] leading-[1.08]"><span className="text-gradient">{t.services.title}</span></h1>
-            <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
-              {t.services.subtitle}
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero badge={t.nav.services} title={t.services.title} subtitle={t.services.subtitle}>
+        <Button size="lg" className="btn-shine px-8" asChild>
+          <Link href="/order">
+            {t.services.getStarted}
+            <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </Button>
+      </PageHero>
 
       {/* Main Services */}
       <section className="py-20">

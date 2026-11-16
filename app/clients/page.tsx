@@ -2,9 +2,8 @@
 
 import { useLanguage } from "@/hooks/use-language"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
-import { Reveal } from "@/components/reveal"
+import { PageHero } from "@/components/page-hero"
 
 export default function ClientsPage() {
   const { t } = useLanguage()
@@ -49,18 +48,11 @@ export default function ClientsPage() {
 
   return (
     <div className="flex flex-col">
+      <PageHero badge={t.nav.clients} title={t.clients.title} subtitle={t.clients.subtitle} />
+
       {/* Client Types */}
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16 space-y-4 fade-up">
-            <Badge variant="secondary" className="w-fit mx-auto px-3 py-1 text-xs uppercase tracking-wider">
-              {t.nav.clients}
-            </Badge>
-            <h1 className="text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:text-[3.4rem] leading-[1.08]"><span className="text-gradient">{t.clients.title}</span></h1>
-            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-              {t.clients.subtitle}
-            </p>
-          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {clientTypes.map((client, index) => (

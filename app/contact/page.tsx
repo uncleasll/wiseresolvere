@@ -7,6 +7,7 @@ import { useLanguage } from "@/hooks/use-language"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Reveal } from "@/components/reveal"
+import { PageHero } from "@/components/page-hero"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -84,22 +85,7 @@ export default function ContactPage() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-16 lg:py-24 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
-        <div className="pointer-events-none absolute inset-0 bg-dots bg-dots-fade" />
-        <div className="pointer-events-none absolute inset-0"><div className="absolute -top-24 -left-24 h-64 w-64 rounded-full bg-primary/10 blur-3xl" /><div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-secondary/15 blur-3xl" /></div>
-        <div className="container relative mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center space-y-6 fade-up">
-            <Badge variant="secondary" className="w-fit mx-auto px-3 py-1 text-xs uppercase tracking-wider">
-              {t.contact.title}
-            </Badge>
-            <h1 className="text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:text-[3.4rem] leading-[1.08]"><span className="text-gradient">{t.contact.getInTouch || "Get In Touch"}</span></h1>
-            <p className="text-lg sm:text-xl text-muted-foreground text-pretty leading-relaxed">
-              {t.contact.heroDesc ||
-                "Have questions about our services? Need a consultation? We're here to help. Contact us today and let's discuss how we can support your business."}
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero badge={t.contact.title} title={t.contact.getInTouch || "Get In Touch"} subtitle={t.contact.heroDesc} />
 
       {/* Contact Information */}
       <section className="py-20">
