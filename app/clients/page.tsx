@@ -4,6 +4,7 @@ import { useLanguage } from "@/hooks/use-language"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
+import { Reveal } from "@/components/reveal"
 
 export default function ClientsPage() {
   const { t } = useLanguage()
@@ -55,7 +56,7 @@ export default function ClientsPage() {
             <Badge variant="secondary" className="w-fit mx-auto px-3 py-1 text-xs uppercase tracking-wider">
               {t.nav.clients}
             </Badge>
-            <h1 className="text-4xl font-bold tracking-tight text-balance sm:text-5xl">{t.clients.title}</h1>
+            <h1 className="text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:text-[3.4rem] leading-[1.08]"><span className="text-gradient">{t.clients.title}</span></h1>
             <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
               {t.clients.subtitle}
             </p>
@@ -65,7 +66,7 @@ export default function ClientsPage() {
             {clientTypes.map((client, index) => (
               <Card
                 key={index}
-                className="group card-hover overflow-hidden p-0 gap-0"
+                className="group gradient-border card-hover overflow-hidden p-0 gap-0"
               >
                 {/* Rasm qismi */}
                 <div className="relative w-full h-52 overflow-hidden">

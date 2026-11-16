@@ -198,3 +198,121 @@ html {
   .fade-up, .animate-float, .animate-float-delayed { animation: none; }
   .card-hover, .card-hover:hover { transition: none; transform: none; }
 }
+
+/* ---------- Fancy layer ---------- */
+/* Scroll reveal (see components/reveal.tsx) */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+/* Dot-grid background for heroes */
+.bg-dots {
+  background-image: radial-gradient(color-mix(in oklch, var(--primary) 14%, transparent) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+.bg-dots-fade {
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+
+/* Gradient headline accent */
+.text-gradient {
+  background: linear-gradient(100deg, var(--primary) 0%, oklch(0.5 0.17 230) 45%, var(--secondary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Gradient border card (uses padding-box trick) */
+.gradient-border {
+  position: relative;
+  background: var(--card);
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(135deg, color-mix(in oklch, var(--primary) 45%, transparent), color-mix(in oklch, var(--secondary) 45%, transparent));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.gradient-border:hover::before { opacity: 1; }
+
+/* Glass surface */
+.glass {
+  background: color-mix(in oklch, var(--background) 72%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid color-mix(in oklch, var(--foreground) 8%, transparent);
+}
+
+/* Logo marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+
+/* Shimmer sweep on primary buttons */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -150%;
+  width: 60%; height: 100%;
+  background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%);
+  transform: skewX(-20deg);
+  transition: left 0.7s ease;
+}
+.btn-shine:hover::after { left: 150%; }
+
+/* Numbered step with connector (desktop only) */
+.step-line::before {
+  content: none;
+}
+@media (min-width: 64rem) {
+.step-line::before {
+  content: "";
+  position: absolute;
+  top: 2rem;
+  left: calc(50% + 2.5rem);
+  width: calc(100% - 5rem);
+  height: 2px;
+  background: linear-gradient(90deg, color-mix(in oklch, var(--primary) 40%, transparent), color-mix(in oklch, var(--secondary) 40%, transparent));
+}
+}
+
+/* Dark footer surface */
+.footer-dark {
+  background:
+    radial-gradient(60% 80% at 100% 0%, color-mix(in oklch, var(--secondary) 18%, transparent), transparent 60%),
+    radial-gradient(50% 70% at 0% 100%, color-mix(in oklch, var(--primary) 30%, transparent), transparent 60%),
+    oklch(0.21 0.04 250);
+  color: oklch(0.92 0 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .marquee-track { animation: none; }
+  .btn-shine::after { display: none; }
+}

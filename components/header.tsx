@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation"
 import { useLanguage } from "@/hooks/use-language"
 import { LanguageSelector } from "@/components/language-selector"
 import { Button } from "@/components/ui/button"
-import { Menu, X, ArrowRight } from "lucide-react"
+import { Menu, X, ArrowRight, Phone, Mail, MapPin } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export function Header() {
@@ -50,6 +50,23 @@ export function Header() {
         scrolled ? "shadow-[0_4px_24px_-12px_rgba(0,0,0,0.25)]" : "shadow-none",
       )}
     >
+      {/* Top contact bar */}
+      <div className="hidden border-b bg-primary text-primary-foreground lg:block">
+        <div className="container mx-auto flex h-9 items-center justify-between px-4 text-xs">
+          <div className="flex items-center gap-6">
+            <a href="tel:+998994020011" className="inline-flex items-center gap-1.5 opacity-90 transition-opacity hover:opacity-100">
+              <Phone className="h-3.5 w-3.5" /> +998 (99) 402 00 11
+            </a>
+            <a href="mailto:info@wiseresolvere.uz" className="inline-flex items-center gap-1.5 opacity-90 transition-opacity hover:opacity-100">
+              <Mail className="h-3.5 w-3.5" /> info@wiseresolvere.uz
+            </a>
+          </div>
+          <span className="inline-flex items-center gap-1.5 opacity-90">
+            <MapPin className="h-3.5 w-3.5" /> Toshkent, Sh. Rustaveli ko'chasi, 150
+          </span>
+        </div>
+      </div>
+
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between lg:h-[72px]">
           <Link href="/" className="flex items-center rounded-md" aria-label="Wise Resolvere">
@@ -89,7 +106,7 @@ export function Header() {
           <div className="hidden items-center gap-3 lg:flex">
             <LanguageSelector />
             <div className="h-6 w-px bg-border" />
-            <Button variant="secondary" asChild>
+            <Button variant="secondary" className="btn-shine" asChild>
               <Link href="/order">
                 {t.nav.order}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />

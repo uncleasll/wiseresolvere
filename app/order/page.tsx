@@ -6,6 +6,7 @@ import { useState } from "react"
 import { useLanguage } from "@/hooks/use-language"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Reveal } from "@/components/reveal"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -73,13 +74,14 @@ export default function OrderPage() {
     <div className="flex flex-col">
       {/* Hero Section */}
       <section className="relative overflow-hidden py-16 lg:py-24 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
+        <div className="pointer-events-none absolute inset-0 bg-dots bg-dots-fade" />
         <div className="pointer-events-none absolute inset-0"><div className="absolute -top-24 -left-24 h-64 w-64 rounded-full bg-primary/10 blur-3xl" /><div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-secondary/15 blur-3xl" /></div>
         <div className="container relative mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center space-y-6 fade-up">
             <Badge variant="secondary" className="w-fit mx-auto px-3 py-1 text-xs uppercase tracking-wider">
               {t.order.title}
             </Badge>
-            <h1 className="text-4xl font-bold tracking-tight text-balance sm:text-5xl">{t.order.getStarted}</h1>
+            <h1 className="text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:text-[3.4rem] leading-[1.08]"><span className="text-gradient">{t.order.getStarted}</span></h1>
             <p className="text-lg sm:text-xl text-muted-foreground text-pretty leading-relaxed">{t.order.heroDesc}</p>
           </div>
         </div>
@@ -90,7 +92,7 @@ export default function OrderPage() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {contactInfo.map((info, index) => (
-              <Card key={index} className="group text-center card-hover">
+              <Card key={index} className="group gradient-border text-center card-hover">
                 <CardHeader>
                   <div className="mx-auto w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 transition-colors group-hover:bg-primary [&>svg]:transition-colors group-hover:[&>svg]:text-primary-foreground">
                     <info.icon className="h-6 w-6 text-primary" />
@@ -181,10 +183,10 @@ export default function OrderPage() {
       {/* What Happens Next */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <Reveal className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold tracking-tight mb-4">{t.order.whatHappensNext}</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{t.order.whatHappensDesc}</p>
-          </div>
+          </Reveal>
 
           <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
             <Card className="text-center p-6 card-hover">

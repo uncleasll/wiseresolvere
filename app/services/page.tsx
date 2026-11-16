@@ -11,6 +11,7 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { Reveal } from "@/components/reveal"
 import {
   Shield,
   Calculator,
@@ -110,13 +111,14 @@ export default function ServicesPage() {
     <div className="flex flex-col">
       {/* Hero Section */}
       <section className="relative overflow-hidden py-16 lg:py-24 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
+        <div className="pointer-events-none absolute inset-0 bg-dots bg-dots-fade" />
         <div className="pointer-events-none absolute inset-0"><div className="absolute -top-24 -left-24 h-64 w-64 rounded-full bg-primary/10 blur-3xl" /><div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-secondary/15 blur-3xl" /></div>
         <div className="container relative mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center space-y-6 fade-up">
             <Badge variant="secondary" className="w-fit mx-auto px-3 py-1 text-xs uppercase tracking-wider">
               {t.nav.services}
             </Badge>
-            <h1 className="text-4xl font-bold tracking-tight text-balance sm:text-5xl">{t.services.title}</h1>
+            <h1 className="text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:text-[3.4rem] leading-[1.08]"><span className="text-gradient">{t.services.title}</span></h1>
             <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
               {t.services.subtitle}
             </p>
@@ -131,7 +133,7 @@ export default function ServicesPage() {
             {mainServices.map((service, index) => (
               <Card
                 key={index}
-                className="group card-hover flex flex-col"
+                className="group gradient-border card-hover flex flex-col"
               >
                 <CardHeader>
                   <div className="flex items-start justify-between">
@@ -185,14 +187,14 @@ export default function ServicesPage() {
       {/* Process Steps */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <Reveal className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold tracking-tight mb-4">
               {t.services.processTitle}
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               {t.services.processSubtitle}
             </p>
-          </div>
+          </Reveal>
 
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -219,6 +221,7 @@ export default function ServicesPage() {
 
       {/* CTA Section */}
       <section className="relative overflow-hidden py-20 bg-primary text-primary-foreground">
+        <div className="pointer-events-none absolute inset-0 opacity-20 [background-image:radial-gradient(rgba(255,255,255,0.5)_1px,transparent_1px)] [background-size:22px_22px]" />
         <div className="pointer-events-none absolute inset-0"><div className="absolute -top-32 right-0 h-80 w-80 rounded-full bg-secondary/30 blur-3xl" /><div className="absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-white/10 blur-3xl" /></div>
         <div className="container relative mx-auto px-4 text-center">
           <div className="max-w-3xl mx-auto space-y-8">

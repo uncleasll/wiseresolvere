@@ -2,8 +2,8 @@
 
 import { useLanguage } from "@/hooks/use-language"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { Reveal } from "@/components/reveal"
+import { Counter } from "@/components/counter"
 import Link from "next/link"
 import Image from "next/image"
 import {
@@ -17,6 +17,7 @@ import {
   FileText,
   PieChart,
   Building,
+  Sparkles,
 } from "lucide-react"
 
 type PartnerKey =
@@ -34,27 +35,41 @@ type PartnerKey =
 export default function HomePage() {
   const { t } = useLanguage()
 
-  const features = [
-    { icon: Shield, title: t.services?.audit, description: t.services?.auditDesc },
-    { icon: TrendingUp, title: t.services?.consulting, description: t.services?.consultingDesc },
-    { icon: Calculator, title: t.services?.tax, description: t.services?.taxDesc },
-    { icon: FileText, title: t.services?.accounting, description: t.services?.accountingDesc },
+  const services = [
+    { icon: Shield, title: t.services.audit, description: t.services.auditDesc },
+    { icon: Calculator, title: t.services.tax, description: t.services.taxDesc },
+    { icon: TrendingUp, title: t.services.consulting, description: t.services.consultingDesc },
+    { icon: FileText, title: t.services.accounting, description: t.services.accountingDesc },
   ]
 
   const stats = [
-    { number: "500+", label: t.stats?.clientsServed || "Clients Served" },
-    { number: "8+", label: t.stats?.yearsExperience || "Years Experience" },
-    { number: "98%", label: t.stats?.clientSatisfaction || "Client Satisfaction" },
-    { number: "24/7", label: t.stats?.supportAvailable || "Support Available" },
+    { value: 500, suffix: "+", label: t.stats.clientsServed },
+    { value: 8, suffix: "+", label: t.stats.yearsExperience },
+    { value: 98, suffix: "%", label: t.stats.clientSatisfaction },
+    { value: 1000, suffix: "+", label: t.hero.projectsCompleted.replace(/^[\d+\s]+/, "") },
   ]
 
   const benefits: string[] = [
-    t.benefits?.certifiedAuditors || "Professional certified auditors",
-    t.benefits?.financialAnalysis || "Comprehensive financial analysis",
-    t.benefits?.compliance || "Regulatory compliance expertise",
-    t.benefits?.customSolutions || "Customized business solutions",
-    t.benefits?.multilingualSupport || "Multilingual support team",
-    t.benefits?.competitivePricing || "Competitive pricing structure",
+    t.benefits.certifiedAuditors,
+    t.benefits.financialAnalysis,
+    t.benefits.compliance,
+    t.benefits.customSolutions,
+    t.benefits.multilingualSupport,
+    t.benefits.competitivePricing,
+  ]
+
+  const features = [
+    { icon: Building, title: t.features.enterprise, desc: t.features.enterpriseDesc, tone: "primary" },
+    { icon: Users, title: t.features.expertTeam, desc: t.features.expertTeamDesc, tone: "secondary" },
+    { icon: PieChart, title: t.features.dataAnalytics, desc: t.features.dataAnalyticsDesc, tone: "primary" },
+    { icon: Award, title: t.features.qualityAssurance, desc: t.features.qualityAssuranceDesc, tone: "secondary" },
+  ]
+
+  const steps = [
+    { n: "01", title: t.services.step1Title, desc: t.services.step1Desc },
+    { n: "02", title: t.services.step2Title, desc: t.services.step2Desc },
+    { n: "03", title: t.services.step3Title, desc: t.services.step3Desc },
+    { n: "04", title: t.services.step4Title, desc: t.services.step4Desc },
   ]
 
   const partners: { key: PartnerKey; logo: string }[] = [
@@ -72,272 +87,296 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col">
-      {/* Hero Section - compact padding + improved layout */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-secondary/10
-        pt-8 pb-16 sm:pt-10 sm:pb-20 lg:pt-14 lg:pb-24">
-        {/* gradient shimmers */}
+      {/* ================= HERO ================= */}
+      <section className="relative overflow-hidden pt-12 pb-20 sm:pt-16 lg:pt-20 lg:pb-28">
+        <div className="pointer-events-none absolute inset-0 bg-dots bg-dots-fade" />
         <div className="pointer-events-none absolute inset-0">
-          <div className="absolute -top-24 -left-24 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />
-          <div className="absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-secondary/20 blur-3xl" />
+          <div className="absolute -top-40 -left-40 h-[28rem] w-[28rem] rounded-full bg-primary/15 blur-3xl" />
+          <div className="absolute -bottom-40 -right-40 h-[30rem] w-[30rem] rounded-full bg-secondary/20 blur-3xl" />
         </div>
 
         <div className="container relative z-10 mx-auto px-4">
-          <div className="grid items-center gap-12 md:gap-16 lg:grid-cols-2">
-            {/* Left */}
-            <div className="space-y-8 fade-up">
-              {/* trust badge */}
-              <div className="inline-flex items-center gap-2 rounded-full border bg-background/60 px-4 py-1.5 text-sm backdrop-blur">
-                <Shield className="h-4 w-4 text-primary" />
-                <span className="text-muted-foreground">
-                  {t.hero?.trustBadge || "Trusted by 500+ businesses"}
+          <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
+            <div className="space-y-8">
+              <div className="fade-up inline-flex items-center gap-2 rounded-full border border-primary/15 bg-background/70 px-4 py-1.5 text-sm shadow-sm backdrop-blur">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-secondary" />
                 </span>
+                <span className="font-medium text-foreground/80">{t.hero.trustBadge}</span>
               </div>
 
-              <div className="space-y-4">
-                <h1 className="text-4xl font-bold leading-[1.1] tracking-tight text-balance sm:text-5xl lg:text-[3.25rem]">
-                  {t.hero?.title}
+              <div className="space-y-5">
+                <h1 className="fade-up fade-up-delay-1 text-4xl font-bold leading-[1.08] tracking-tight text-balance sm:text-5xl lg:text-6xl">
+                  <span className="text-gradient">{t.hero.title}</span>
                 </h1>
-                <p className="max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty sm:text-xl">
-                  {t.hero?.subtitle}
+                <p className="fade-up fade-up-delay-2 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty sm:text-xl">
+                  {t.hero.subtitle}
                 </p>
               </div>
 
-              {/* CTAs */}
-              <div className="flex flex-col gap-4 sm:flex-row">
-                <Button size="lg" className="px-8" asChild>
+              <div className="fade-up fade-up-delay-3 flex flex-col gap-3 sm:flex-row">
+                <Button size="lg" className="btn-shine px-8" asChild>
                   <Link href="/order">
-                    {t.hero?.cta}
+                    {t.hero.cta}
                     <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </Button>
-                {/* <Button size="lg" variant="outline" className="bg-transparent px-8 text-lg" asChild>
-                  <Link href="/order">{t.nav?.services}</Link>
-                </Button> */}
+                <Button size="lg" variant="outline" className="px-8" asChild>
+                  <Link href="/services">{t.nav.services}</Link>
+                </Button>
               </div>
 
-              {/* mini stats */}
-              <div className="grid grid-cols-2 gap-6 pt-2 sm:grid-cols-3">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                    <Award className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <div className="text-sm text-muted-foreground">
-                      {t.stats?.yearsExperience || "Years Experience"}
-                    </div>
-                    <div className="text-lg font-semibold">
-                      {t.hero?.yearsExperience || "15+ Years Experience"}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary/10">
-                    <Users className="h-5 w-5 text-secondary" />
-                  </div>
-                  <div>
-                    <div className="text-sm text-muted-foreground">
-                      {t.stats?.clientsServed || "Clients Served"}
-                    </div>
-                    <div className="text-lg font-semibold">
-                      {t.hero?.clientsSatisfied || "500+ Satisfied Clients"}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="col-span-2 flex items-center gap-3 sm:col-span-1">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                    <PieChart className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <div className="text-sm text-muted-foreground">
-                      {t.stats?.supportAvailable || "Support"}
-                    </div>
-                    <div className="text-lg font-semibold">
-                      {t.hero?.projectsCompleted || "1000+ Projects Completed"}
-                    </div>
-                  </div>
-                </div>
+              <div className="fade-up fade-up-delay-3 flex flex-wrap items-center gap-x-6 gap-y-3 pt-2 text-sm text-muted-foreground">
+                {[t.hero.yearsExperience, t.hero.clientsSatisfied, t.hero.projectsCompleted].map((s) => (
+                  <span key={s} className="inline-flex items-center gap-2">
+                    <CheckCircle className="h-4 w-4 text-secondary" />
+                    {s}
+                  </span>
+                ))}
               </div>
             </div>
 
-            {/* Right */}
             <div className="relative fade-up fade-up-delay-2">
-              <div className="relative rounded-2xl border bg-card p-3 shadow-xl">
-                {/* hero image — o'zingiznikini public/ ichiga qo'ying */}
-                <div className="overflow-hidden rounded-xl">
+              <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-primary/20 via-transparent to-secondary/25 blur-2xl" />
+              <div className="relative overflow-hidden rounded-3xl border bg-card p-2.5 shadow-2xl shadow-primary/10">
+                <div className="overflow-hidden rounded-[1.1rem]">
                   <Image
                     src="/hero-2.jpg"
                     alt="Wise Resolvere — Audit & Consulting"
                     width={960}
                     height={720}
-                    className="h-auto w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
+                    className="h-auto w-full object-cover transition-transform duration-[1200ms] hover:scale-[1.04]"
                     priority
                   />
                 </div>
+              </div>
 
-                {/* floating badges */}
-                <div className="pointer-events-none absolute -left-5 top-8 hidden md:block animate-float">
-                  <div className="rounded-xl border bg-background/90 px-4 py-2.5 shadow-lg backdrop-blur">
-                    <div className="flex items-center gap-2">
+              <div className="pointer-events-none absolute -left-6 top-10 hidden md:block animate-float">
+                <div className="glass rounded-2xl px-4 py-3 shadow-lg">
+                  <div className="flex items-center gap-3">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10">
                       <CheckCircle className="h-5 w-5 text-primary" />
-                      <span className="text-sm font-medium">{t.features?.qualityAssurance || "Quality Assurance"}</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pointer-events-none absolute -right-5 bottom-8 hidden md:block animate-float-delayed">
-                  <div className="rounded-xl border bg-background/90 px-4 py-2.5 shadow-lg backdrop-blur">
-                    <div className="flex items-center gap-2">
-                      <TrendingUp className="h-5 w-5 text-secondary" />
-                      <span className="text-sm font-medium">{t.features?.dataAnalytics || "Data Analytics"}</span>
+                    </span>
+                    <div>
+                      <div className="text-xs text-muted-foreground">ISA / IFRS</div>
+                      <div className="text-sm font-semibold">{t.features.qualityAssurance}</div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* subtle glow */}
-              <div className="absolute -bottom-8 left-1/2 h-40 w-72 -translate-x-1/2 rounded-full bg-primary/20 blur-3xl" />
+              <div className="pointer-events-none absolute -right-6 bottom-10 hidden md:block animate-float-delayed">
+                <div className="glass rounded-2xl px-4 py-3 shadow-lg">
+                  <div className="flex items-center gap-3">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-secondary/15">
+                      <TrendingUp className="h-5 w-5 text-secondary" />
+                    </span>
+                    <div>
+                      <div className="text-xs text-muted-foreground">+24%</div>
+                      <div className="text-sm font-semibold">{t.features.dataAnalytics}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      
-
-      {/* Why Choose Us Section */}
-      <section className="py-20">
+      {/* ================= STATS BAR ================= */}
+      <section className="relative">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
+          <Reveal className="relative -mt-2 grid grid-cols-2 divide-border overflow-hidden rounded-2xl border bg-card shadow-xl shadow-primary/5 md:grid-cols-4 md:divide-x">
+            {stats.map((s, i) => (
+              <div key={i} className="px-6 py-7 text-center md:py-8">
+                <div className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">
+                  <Counter value={s.value} suffix={s.suffix} />
+                </div>
+                <div className="mt-1.5 text-sm text-muted-foreground">{s.label}</div>
+              </div>
+            ))}
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ================= SERVICES ================= */}
+      <section className="py-24">
+        <div className="container mx-auto px-4">
+          <Reveal className="mx-auto mb-14 max-w-2xl text-center">
+            <span className="eyebrow justify-center">{t.nav.services}</span>
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-balance lg:text-4xl">{t.services.title}</h2>
+            <p className="mt-4 text-lg text-muted-foreground">{t.services.subtitle}</p>
+          </Reveal>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {services.map((s, i) => (
+              <Reveal key={i} delay={i * 90}>
+                <Link
+                  href="/services"
+                  className="gradient-border group flex h-full flex-col rounded-2xl p-6 card-hover"
+                >
+                  <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
+                    <s.icon className="h-6 w-6" />
+                  </span>
+                  <h3 className="text-lg font-semibold leading-snug">{s.title}</h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{s.description}</p>
+                  <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary">
+                    {t.services.getStarted}
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= WHY CHOOSE US ================= */}
+      <section className="relative overflow-hidden bg-muted/40 py-24">
+        <div className="pointer-events-none absolute inset-0 bg-dots opacity-60" />
+        <div className="container relative mx-auto px-4">
+          <div className="grid items-center gap-14 lg:grid-cols-2">
+            <Reveal className="space-y-8">
               <div className="space-y-4">
-                <span className="eyebrow">{t.nav?.about}</span>
-                <h2 className="text-3xl lg:text-4xl font-bold tracking-tight text-balance">
-                  {t.whyChoose?.title || "Why Choose Wise Resolvere?"}
-                </h2>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  {t.whyChoose?.subtitle ||
-                    "We combine expertise, technology, and personalized service to deliver exceptional results for your business."}
-                </p>
+                <span className="eyebrow">{t.nav.about}</span>
+                <h2 className="text-3xl font-bold tracking-tight text-balance lg:text-4xl">{t.whyChoose.title}</h2>
+                <p className="text-lg leading-relaxed text-muted-foreground">{t.whyChoose.subtitle}</p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {benefits.map((benefit, index) => (
-                  <div key={index} className="flex items-center gap-3 rounded-lg border bg-card/60 px-3 py-2.5 transition-colors hover:border-secondary/40">
-                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-secondary/15"><CheckCircle className="h-3.5 w-3.5 text-secondary" /></span>
-                    <span className="text-sm font-medium">{benefit}</span>
-                  </div>
+              <ul className="grid gap-3 sm:grid-cols-2">
+                {benefits.map((b, i) => (
+                  <li
+                    key={i}
+                    className="flex items-center gap-3 rounded-xl border bg-background/80 px-3.5 py-3 backdrop-blur transition-colors hover:border-secondary/50"
+                  >
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-secondary/15">
+                      <CheckCircle className="h-3.5 w-3.5 text-secondary" />
+                    </span>
+                    <span className="text-sm font-medium">{b}</span>
+                  </li>
                 ))}
-              </div>
+              </ul>
 
               <Button size="lg" className="w-fit" asChild>
                 <Link href="/about">
-                  {t.whyChoose?.learnMore || "Learn More About Us"}
+                  {t.whyChoose.learnMore}
                   <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
-            </div>
+            </Reveal>
 
             <div className="grid grid-cols-2 gap-4">
-              <Card className="p-6 text-center card-hover">
-                <Building className="h-12 w-12 text-primary mx-auto mb-4" />
-                <h3 className="font-semibold mb-2">{t.features?.enterprise || "Enterprise Solutions"}</h3>
-                <p className="text-sm text-muted-foreground">
-                  {t.features?.enterpriseDesc || "Scalable audit solutions for large organizations"}
-                </p>
-              </Card>
-
-              <Card className="p-6 text-center mt-8 card-hover">
-                <Users className="h-12 w-12 text-secondary mx-auto mb-4" />
-                <h3 className="font-semibold mb-2">{t.features?.expertTeam || "Expert Team"}</h3>
-                <p className="text-sm text-muted-foreground">
-                  {t.features?.expertTeamDesc || "Certified professionals with extensive experience"}
-                </p>
-              </Card>
-
-              <Card className="p-6 text-center card-hover">
-                <PieChart className="h-12 w-12 text-primary mx-auto mb-4" />
-                <h3 className="font-semibold mb-2">{t.features?.dataAnalytics || "Data Analytics"}</h3>
-                <p className="text-sm text-muted-foreground">
-                  {t.features?.dataAnalyticsDesc || "Advanced analytics for better business insights"}
-                </p>
-              </Card>
-
-              <Card className="p-6 text-center mt-8 card-hover">
-                <Award className="h-12 w-12 text-secondary mx-auto mb-4" />
-                <h3 className="font-semibold mb-2">{t.features?.qualityAssurance || "Quality Assurance"}</h3>
-                <p className="text-sm text-muted-foreground">
-                  {t.features?.qualityAssuranceDesc || "Rigorous quality control processes"}
-                </p>
-              </Card>
+              {features.map((f, i) => (
+                <Reveal key={i} delay={i * 100} className={i % 2 === 1 ? "mt-8" : ""}>
+                  <div className="card-hover h-full rounded-2xl border bg-card p-6 text-center">
+                    <span
+                      className={
+                        "mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl " +
+                        (f.tone === "primary" ? "bg-primary/10 text-primary" : "bg-secondary/15 text-secondary")
+                      }
+                    >
+                      <f.icon className="h-7 w-7" />
+                    </span>
+                    <h3 className="font-semibold">{f.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
+                  </div>
+                </Reveal>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="relative overflow-hidden py-20 bg-primary text-primary-foreground">
-        <div className="pointer-events-none absolute inset-0"><div className="absolute -top-32 right-0 h-80 w-80 rounded-full bg-secondary/30 blur-3xl" /><div className="absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-white/10 blur-3xl" /></div>
-        <div className="container relative mx-auto px-4 text-center">
-          <div className="max-w-3xl mx-auto space-y-8">
-            <h2 className="text-3xl lg:text-4xl font-bold">{t.cta?.title || "Ready to Get Started?"}</h2>
-            <p className="text-xl opacity-90 leading-relaxed">
-              {t.cta?.subtitle ||
-                "Contact us today for a free consultation and discover how we can help your business achieve its financial goals."}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="secondary" className="px-8" asChild>
-                <Link href="/order">
-                  {t.cta?.consultation || "Get Free Consultation"}
-                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="px-8 border-primary-foreground/60 text-primary-foreground hover:bg-primary-foreground hover:text-primary hover:border-primary-foreground bg-transparent"
-                asChild
-              >
-                <Link href="/services">{t.cta?.viewRates || "View Our Services"}</Link>
-              </Button>
-            </div>
+      {/* ================= PROCESS ================= */}
+      <section className="py-24">
+        <div className="container mx-auto px-4">
+          <Reveal className="mx-auto mb-16 max-w-2xl text-center">
+            <span className="eyebrow justify-center">
+              <Sparkles className="h-3.5 w-3.5" />
+              {t.services.processTitle}
+            </span>
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-balance lg:text-4xl">{t.services.processTitle}</h2>
+            <p className="mt-4 text-lg text-muted-foreground">{t.services.processSubtitle}</p>
+          </Reveal>
+
+          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+            {steps.map((s, i) => (
+              <Reveal key={s.n} delay={i * 120} className={"relative text-center " + (i < steps.length - 1 ? "step-line" : "")}>
+                <div className="relative z-10 mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-[oklch(0.5_0.17_230)] text-xl font-bold text-primary-foreground shadow-lg shadow-primary/25 ring-8 ring-background">
+                  {s.n}
+                </div>
+                <h3 className="text-lg font-semibold">{s.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
 
-    {/* Partners Section */}
-<section className="py-20 bg-muted/30">
-  <div className="container mx-auto px-4">
-    <div className="text-center mb-12">
-      <h2 className="text-3xl lg:text-4xl font-bold tracking-tight mb-3">
-        {t.partners?.title || "Bizga ishonch bildirganlar"}
-      </h2>
-      <p className="text-muted-foreground max-w-2xl mx-auto">
-        {t.partners?.subtitle || "Yetakchi kompaniyalar hamkorligimizdan mamnun"}
-      </p>
-    </div> 
+      {/* ================= PARTNERS (marquee) ================= */}
+      <section className="border-y bg-muted/30 py-20">
+        <div className="container mx-auto px-4">
+          <Reveal className="mb-12 text-center">
+            <span className="eyebrow justify-center">{t.nav.clients}</span>
+            <h2 className="mt-3 text-3xl font-bold tracking-tight lg:text-4xl">{t.partners?.title}</h2>
+            <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">{t.partners?.subtitle}</p>
+          </Reveal>
+        </div>
 
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-      {partners.map((p) => {
-        const name = t.partners?.items?.[p.key] ?? p.key
-        return (
-          <div
-            key={p.key}
-            className="group relative rounded-xl bg-white border card-hover aspect-[16/9] flex items-center justify-center"
-            title={name}
-          >
-            <Image
-              src={p.logo}
-              alt={name}
-              fill
-              className="object-contain p-5 grayscale opacity-70 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100"
-            />
+        <div className="marquee">
+          <div className="marquee-track gap-6 px-3">
+            {[...partners, ...partners].map((p, i) => {
+              const name = t.partners?.items?.[p.key] ?? p.key
+              return (
+                <div
+                  key={`${p.key}-${i}`}
+                  className="group relative flex h-24 w-48 shrink-0 items-center justify-center rounded-2xl border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                  title={name}
+                >
+                  <Image
+                    src={p.logo}
+                    alt={name}
+                    fill
+                    className="object-contain p-5 opacity-70 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0"
+                  />
+                </div>
+              )
+            })}
           </div>
-        )
-      })}
-    </div>
-  </div>
-</section>
+        </div>
+      </section>
+
+      {/* ================= CTA ================= */}
+      <section className="py-24">
+        <div className="container mx-auto px-4">
+          <Reveal className="relative overflow-hidden rounded-3xl bg-primary px-6 py-16 text-center text-primary-foreground shadow-2xl shadow-primary/20 sm:px-12 lg:py-20">
+            <div className="pointer-events-none absolute inset-0 bg-dots opacity-20 [background-image:radial-gradient(rgba(255,255,255,0.5)_1px,transparent_1px)]" />
+            <div className="pointer-events-none absolute -top-32 right-0 h-80 w-80 rounded-full bg-secondary/40 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-white/15 blur-3xl" />
+            <div className="relative mx-auto max-w-3xl space-y-7">
+              <h2 className="text-3xl font-bold tracking-tight text-balance lg:text-5xl">{t.cta.title}</h2>
+              <p className="text-lg leading-relaxed opacity-90 sm:text-xl">{t.cta.subtitle}</p>
+              <div className="flex flex-col justify-center gap-4 sm:flex-row">
+                <Button size="lg" variant="secondary" className="btn-shine px-8" asChild>
+                  <Link href="/order">
+                    {t.cta.consultation}
+                    <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-primary-foreground/50 bg-transparent px-8 text-primary-foreground hover:border-primary-foreground hover:bg-primary-foreground hover:text-primary"
+                  asChild
+                >
+                  <Link href="/services">{t.cta.viewRates}</Link>
+                </Button>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
     </div>
   )
 }
